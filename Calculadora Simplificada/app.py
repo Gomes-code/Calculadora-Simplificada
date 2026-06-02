@@ -40,7 +40,8 @@ def get_conn() -> sqlite3.Connection:
             f"Banco de dados local não encontrado em {DB_PATH}. "
             "Rode python build_database.py para recriar o banco."
         )
-    conn = sqlite3.connect(DB_PATH)
+    # No Vercel o sistema de arquivos é read-only, devemos forçar leitura
+    conn = sqlite3.connect(f"file:{DB_PATH}?mode=ro", uri=True)
     conn.row_factory = sqlite3.Row
     return conn
 
