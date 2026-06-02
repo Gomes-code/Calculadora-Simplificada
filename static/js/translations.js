@@ -12,13 +12,13 @@ const translations = {
     // Dashboard Headers
     dash_title: "Calculadora Simplificada de Carbono Incorporado - TPF",
     btn_hub: "⬅️ Voltar ao Hub",
-    btn_save: "Salvar Cenário (💾)",
-    btn_export: "Exportar (🖨️)",
+    btn_save: "Salvar Cenário",
+    btn_export: "Exportar",
     
     // Config Panel
     config_title: "Configuração do Cenário",
     lbl_scenario_name: "Nome do Cenário:",
-    lbl_state: "Estado (Custo Local):",
+    lbl_state: "Custo Local:",
     lbl_area: "Área Construída (m²):",
     
     // Categories and Selection
@@ -38,14 +38,15 @@ const translations = {
     lbl_loading: "Carregando...",
     
     // KPI Cards
-    kpi_carbon: "Carbono Incorporado (Global)",
+    kpi_carbon: "CARBONO INCORPORADO",
     kpi_carbon_desc: "Emissão total do cenário",
-    kpi_cost: "Custo Direto (Parcial)",
+    kpi_cost: "CUSTO PARCIAL DA OBRA",
     kpi_cost_desc: "Custo total dos materiais listados",
-    kpi_carbon_intensity: "Intensidade de Carbono",
+    kpi_carbon_intensity: "INTENSIDADE DE CO₂e",
     kpi_carbon_intensity_desc: "Emissão por metro quadrado",
-    kpi_cost_intensity: "Intensidade de Custo",
+    kpi_cost_intensity: "INTENSIDADE DE CUSTO",
     kpi_cost_intensity_desc: "Custo por metro quadrado",
+    kpi_trees: "COMPENSAÇÃO ESTIMADA",
     
     // Benchmarks
     bm_title: "Configurar Parâmetros de Referência",
@@ -112,12 +113,12 @@ const translations = {
 
     dash_title: "Simplified Embodied Carbon Calculator - TPF",
     btn_hub: "⬅️ Back to Hub",
-    btn_save: "Save Scenario (💾)",
-    btn_export: "Export (🖨️)",
+    btn_save: "Save Scenario",
+    btn_export: "Export",
     
     config_title: "Scenario Configuration",
     lbl_scenario_name: "Scenario Name:",
-    lbl_state: "State (Local Cost):",
+    lbl_state: "Local Cost:",
     lbl_area: "Built Area (m²):",
     
     cat_select_title: "Material Selection (Per Built Area)",
@@ -135,14 +136,15 @@ const translations = {
     lbl_select_material: "-- Select --",
     lbl_loading: "Loading...",
     
-    kpi_carbon: "Total Embodied Carbon",
+    kpi_carbon: "TOTAL EMBODIED CARBON",
     kpi_carbon_desc: "Total scenario emissions",
-    kpi_cost: "Direct Cost (Partial)",
+    kpi_cost: "PARTIAL PROJECT COST",
     kpi_cost_desc: "Total cost of listed materials",
-    kpi_carbon_intensity: "Carbon Intensity",
+    kpi_carbon_intensity: "CO₂e INTENSITY",
     kpi_carbon_intensity_desc: "Emissions per square meter",
-    kpi_cost_intensity: "Cost Intensity",
+    kpi_cost_intensity: "COST INTENSITY",
     kpi_cost_intensity_desc: "Cost per square meter",
+    kpi_trees: "ESTIMATED OFFSET",
     
     bm_title: "Configure Benchmark Parameters",
     bm_desc: "Set the benchmark standards for Carbon and Cost analyses.",
@@ -203,12 +205,12 @@ const translations = {
 
     dash_title: "Calculateur Simplifié de Carbone Incarporé - TPF",
     btn_hub: "⬅️ Retour au Hub",
-    btn_save: "Sauvegarder Scénario (💾)",
-    btn_export: "Exporter (🖨️)",
+    btn_save: "Sauvegarder Scénario",
+    btn_export: "Exporter",
     
     config_title: "Configuration du Scénario",
     lbl_scenario_name: "Nom du Scénario:",
-    lbl_state: "État (Coût Local):",
+    lbl_state: "Coût Local:",
     lbl_area: "Surface Construite (m²):",
     
     cat_select_title: "Sélection des Matériaux (Par Surface)",
@@ -226,14 +228,15 @@ const translations = {
     lbl_select_material: "-- Sélectionner --",
     lbl_loading: "Chargement...",
     
-    kpi_carbon: "Carbone Incarporé Total",
+    kpi_carbon: "CARBONE INCARPORÉ TOTAL",
     kpi_carbon_desc: "Émissions totales du scénario",
-    kpi_cost: "Coût Direct (Partiel)",
+    kpi_cost: "COÛT DU PROJET PARTIEL",
     kpi_cost_desc: "Coût total des matériaux listés",
-    kpi_carbon_intensity: "Intensité Carbone",
+    kpi_carbon_intensity: "INTENSITÉ CO₂e",
     kpi_carbon_intensity_desc: "Émissions par mètre carré",
-    kpi_cost_intensity: "Intensité de Coût",
+    kpi_cost_intensity: "INTENSITÉ DE COÛT",
     kpi_cost_intensity_desc: "Coût par mètre carré",
+    kpi_trees: "COMPENSATION ESTIMÉE",
     
     bm_title: "Configurer les Paramètres de Référence",
     bm_desc: "Définissez les références pour l'analyse du Carbone et des Coûts.",
@@ -294,12 +297,12 @@ const translations = {
 
     dash_title: "Vereinfachter Rechner für Gebundenen Kohlenstoff - TPF",
     btn_hub: "⬅️ Zurück zum Hub",
-    btn_save: "Szenario Speichern (💾)",
-    btn_export: "Exportieren (🖨️)",
+    btn_save: "Szenario Speichern",
+    btn_export: "Exportieren",
     
     config_title: "Szenario-Konfiguration",
     lbl_scenario_name: "Szenario Name:",
-    lbl_state: "Bundesland (Lokale Kosten):",
+    lbl_state: "Lokale Kosten:",
     lbl_area: "Bebaute Fläche (m²):",
     
     cat_select_title: "Materialauswahl (Pro Bebaute Fläche)",
@@ -317,14 +320,15 @@ const translations = {
     lbl_select_material: "-- Auswählen --",
     lbl_loading: "Laden...",
     
-    kpi_carbon: "Gebundener Gesamtkohlenstoff",
+    kpi_carbon: "GEBUNDENER GESAMTKOHLENSTOFF",
     kpi_carbon_desc: "Gesamtemissionen des Szenarios",
-    kpi_cost: "Direkte Kosten (Teilweise)",
+    kpi_cost: "TEILPROJEKTKOSTEN",
     kpi_cost_desc: "Gesamtkosten der gelisteten Materialien",
-    kpi_carbon_intensity: "Kohlenstoffintensität",
+    kpi_carbon_intensity: "CO₂e INTENSITÄT",
     kpi_carbon_intensity_desc: "Emissionen pro Quadratmeter",
-    kpi_cost_intensity: "Kostenintensität",
+    kpi_cost_intensity: "KOSTENINTENSITÄT",
     kpi_cost_intensity_desc: "Kosten pro Quadratmeter",
+    kpi_trees: "GESCHÄTZTE KOMPENSATION",
     
     bm_title: "Referenzparameter Konfigurieren",
     bm_desc: "Legen Sie die Benchmark-Standards für Kohlenstoff- und Kostenanalysen fest.",
@@ -385,12 +389,12 @@ const translations = {
 
     dash_title: "Calculadora Simplificada de Carbono Incorporado - TPF",
     btn_hub: "⬅️ Volver al Hub",
-    btn_save: "Guardar Escenario (💾)",
-    btn_export: "Exportar (🖨️)",
+    btn_save: "Guardar Escenario",
+    btn_export: "Exportar",
     
     config_title: "Configuración del Escenario",
     lbl_scenario_name: "Nombre del Escenario:",
-    lbl_state: "Estado (Costo Local):",
+    lbl_state: "Costo Local:",
     lbl_area: "Área Construida (m²):",
     
     cat_select_title: "Selección de Materiales (Por Área Construida)",
@@ -408,14 +412,15 @@ const translations = {
     lbl_select_material: "-- Seleccionar --",
     lbl_loading: "Cargando...",
     
-    kpi_carbon: "Carbono Incorporado Total",
+    kpi_carbon: "CARBONO INCORPORADO",
     kpi_carbon_desc: "Emisiones totales del escenario",
-    kpi_cost: "Costo Directo (Parcial)",
+    kpi_cost: "COSTO PARCIAL DE OBRA",
     kpi_cost_desc: "Costo total de los materiales listados",
-    kpi_carbon_intensity: "Intensidad de Carbono",
+    kpi_carbon_intensity: "INTENSIDAD DE CO₂e",
     kpi_carbon_intensity_desc: "Emisión por metro cuadrado",
-    kpi_cost_intensity: "Intensidad de Costo",
+    kpi_cost_intensity: "INTENSIDAD DE COSTO",
     kpi_cost_intensity_desc: "Costo por metro cuadrado",
+    kpi_trees: "COMPENSACIÓN ESTIMADA",
     
     bm_title: "Configurar Parámetros de Referencia",
     bm_desc: "Defina los estándares de referencia para los análisis de Carbono y Costo.",
