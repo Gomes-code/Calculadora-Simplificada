@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculadora de Carbono TPF - Hub</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}?v=36">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: var(--bg-app);
+      font-family: "Aptos", Roboto, Arial, sans-serif;
+    }
+    .hub-container {
+      max-width: 800px;
+      width: 90%;
+      text-align: center;
+    }
+    .hub-logo {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--text-main);
+      margin-bottom: 10px;
+    }
+    .hub-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+    }
+    .hub-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .hub-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--line-color);
+      border-radius: 12px;
+      padding: 32px 24px;
+      text-decoration: none;
+      color: var(--text-main);
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .hub-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      border-color: var(--tpf-blue-mid);
+    }
+    .hub-card.disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .hub-card.disabled:hover {
+      transform: none;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      border-color: var(--line-color);
+    }
+    .hub-card-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+    }
+    .hub-card-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    .hub-card-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+    .badge {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: var(--tpf-orange);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: bold;
+      padding: 4px 8px;
+      border-radius: 12px;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <div class="hub-container">
+    <div class="hub-logo">HUB DE SUSTENTABILIDADE</div>
+    <div class="hub-subtitle">TPF Engenharia - Calculadoras de Carbono Incorporado</div>
+    
+    <div class="hub-grid">
+      <a href="/residencial" class="hub-card">
+        <div class="hub-card-icon">🏗️</div>
+        <div class="hub-card-title">Edificações</div>
+        <div class="hub-card-desc">Análise de emissões e custos para projetos residenciais, comerciais e HIS.</div>
+      </a>
+      
+      <div class="hub-card disabled" onclick="alert('Esta calculadora chegará em breve!')">
+        <div class="badge">Em breve</div>
+        <div class="hub-card-icon">🛣️</div>
+        <div class="hub-card-title">Infraestrutura Rodoviária</div>
+        <div class="hub-card-desc">Análise de emissões e custos para pavimentação, terraplenagem e obras viárias.</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

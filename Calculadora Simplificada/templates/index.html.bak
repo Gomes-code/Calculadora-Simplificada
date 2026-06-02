@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculadora de Carbono TPF</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}?v=5-dashboard">
+</head>
+<body>
+  <div class="app-background" aria-hidden="true"></div>
+
+  <div class="dashboard-shell">
+    <aside class="sidebar" aria-label="Controle e categorias">
+      <header class="brand-panel">
+        <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+        <div>
+          <p class="eyebrow">TPF Engenharia</p>
+          <h1>Carbono Incorporado</h1>
+          <span class="hero-version" aria-label="Versão do aplicativo">{{ app_version }}</span>
+        </div>
+      </header>
+
+      <section class="panel-card controls-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow dark">Simulação</p>
+            <h2>Análise atual</h2>
+          </div>
+          <button id="saveSimulation" class="primary-button" type="button">Registrar</button>
+        </div>
+
+        <div class="form-grid">
+          <label class="field field-wide">
+            <span>Nome</span>
+            <input id="scenarioName" type="text" autocomplete="off" placeholder="Alternativa A">
+          </label>
+          <label class="field">
+            <span>Área total (m²)</span>
+            <input id="builtArea" type="text" inputmode="decimal" autocomplete="off" placeholder="0,00">
+          </label>
+        </div>
+
+        <div class="scenario-tabs" role="group" aria-label="Cenário de emissão">
+          <button class="scenario-btn" data-scenario="min" type="button">Mín.</button>
+          <button class="scenario-btn active" data-scenario="med" type="button">Méd.</button>
+          <button class="scenario-btn" data-scenario="max" type="button">Máx.</button>
+        </div>
+
+        <div class="control-actions">
+          <label class="checkbox-line">
+            <input id="showIncomplete" type="checkbox" checked>
+            <span>Itens sem dados</span>
+          </label>
+          <button id="clearQuantities" class="text-button" type="button">Zerar</button>
+          <button id="clearHistory" class="text-button danger" type="button">Histórico</button>
+        </div>
+      </section>
+
+      <nav id="categoryTabs" class="category-tabs" aria-label="Categorias"></nav>
+    </aside>
+
+    <main class="dashboard-main" aria-label="Dashboard da calculadora">
+      <section class="topbar">
+        <div>
+          <p class="eyebrow dark">Dashboard</p>
+          <h2>Calculadora de Carbono Simplificada</h2>
+        </div>
+        <div class="topbar-actions">
+          <span id="scenarioLabel">Cenário médio</span>
+        </div>
+      </section>
+
+      <section class="kpi-grid" aria-label="Indicadores principais">
+        <div class="kpi main-kpi">
+          <span>Total</span>
+          <strong id="totalEmission">0,0 kgCO₂e</strong>
+          <small>categorias válidas</small>
+        </div>
+        <div class="kpi">
+          <span>Taxa</span>
+          <strong id="areaRate">-</strong>
+          <small>kgCO₂e/m²</small>
+        </div>
+        <div class="kpi">
+          <span>Maior categoria</span>
+          <strong id="majorCategory">-</strong>
+          <small id="majorCategoryValue">-</small>
+        </div>
+        <div class="kpi">
+          <span>Vs. anterior</span>
+          <strong id="reductionIndicator">sem histórico</strong>
+          <small id="reductionHelper">registre uma simulação</small>
+        </div>
+      </section>
+
+      <div id="missingDataAlert" class="status-alert hidden">
+        <strong>{{ missing_message }}</strong>
+        <p>Uma categoria com quantidade informada está sem dados completos e não entrou no total.</p>
+      </div>
+      <div id="conversionAlert" class="status-alert blue hidden">
+        <strong>Conversão pendente</strong>
+        <p>Existe item em unidade diferente de m² sem taxa de conversão preenchida.</p>
+      </div>
+
+      <section class="dashboard-grid">
+        <section id="activeCategoryPanel" class="category-panel">
+          <div class="loading-card">Carregando categorias...</div>
+        </section>
+
+        <aside class="panel-card history-panel">
+          <div class="panel-heading compact">
+            <div>
+              <p class="eyebrow dark">Comparativo</p>
+              <h2>Histórico</h2>
+            </div>
+          </div>
+
+          <div id="historyEmpty" class="empty-mini">Registre uma simulação para comparar alternativas.</div>
+          <div id="historyContent" class="hidden">
+            <div id="historyChart" class="mini-chart" aria-label="Gráfico das últimas simulações"></div>
+            <div id="historyHighlights" class="history-highlights"></div>
+            <details class="history-details">
+              <summary>Ver detalhes</summary>
+              <div id="historyRows" class="history-list"></div>
+            </details>
+          </div>
+        </aside>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    window.MISSING_DATA_MESSAGE = {{ missing_message|tojson }};
+  </script>
+  <script src="{{ url_for('static', filename='js/app.js') }}?v=5-dashboard"></script>
+</body>
+</html>
