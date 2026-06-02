@@ -10,6 +10,33 @@ let state = loadState();
 let categories = [];
 let itemsByCategory = {};
 let charts = {};
+let currentLang = localStorage.getItem('tpf_lang') || 'pt';
+
+function getTranslation(key) {
+  if (typeof translations !== 'undefined' && translations[currentLang] && translations[currentLang][key]) {
+    return translations[currentLang][key];
+  }
+  return key;
+}
+
+function applyTranslations() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    el.innerHTML = getTranslation(key).replace(/\n/g, '<br>');
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    el.placeholder = getTranslation(key);
+  });
+}
+
+window.changeLang = function(lang) {
+  currentLang = lang;
+  localStorage.setItem('tpf_lang', lang);
+  applyTranslations();
+  if (typeof renderSidebar === 'function') renderSidebar();
+  if (typeof updateDashboard === 'function') updateDashboard();
+};
 
 const CATEGORY_COLORS = {
   "superestrutura": "#023E8A",
@@ -237,14 +264,16 @@ function renderSidebar() {
     
     const options = items.map(item => `<option value="${item.codigo_composicao}" ${item.codigo_composicao == selectedItem ? "selected" : ""}>${item.codigo_composicao} - ${item.descricao}</option>`).join("");
     
+    const translatedCatTitle = getTranslation("cat_" + key) || cat.label;
+
     return `
       <div class="cat-item">
-        <div class="cat-title">${cat.label}</div>
+        <div class="cat-title">${translatedCatTitle}</div>
         <select class="cat-select" data-cat="${key}">
-          <option value="">Selecione uma opção...</option>
+          <option value="">${getTranslation("lbl_select_material")}</option>
           ${options}
         </select>
-        <input type="number" class="cat-input" data-cat="${key}" placeholder="Qtd. em m²" value="${qty}">
+        <input type="number" class="cat-input" data-cat="${key}" placeholder="${getTranslation("lbl_qty_sqm")}" value="${qty}">
         <div class="progress-container">
           <div class="progress-fill" id="prog_${key}"></div>
         </div>
@@ -390,6 +419,7 @@ function updateDashboard() {
   const trees = Math.round(totalEmission / 15);
   el.kpiTrees.textContent = `🌲 ${trees.toLocaleString("pt-BR")}`;
 
+  applyTranslations();
   updateCharts(catLabels, catEmissions, bestCatEmissions, catColors, totalEmission, totalCost, rate, analysis);
   renderHistory(analysis);
 }
@@ -409,15 +439,15 @@ function renderHistory(analysis) {
     let badges = [];
     if (state.history.length > 1) {
       if (analysis.isSingleBest && h.id === analysis.bestEntry.id) {
-        badges.push(`<span class="history-badge badge-super-best">Melhor Solução</span>`);
+        badges.push(`<span class="history-badge badge-super-best">${getTranslation("verdict_balanced")}</span>`);
       } else {
-        if (h.totalEmission === analysis.minEmission) badges.push(`<span class="history-badge badge-emission">Melhor Emissão</span>`);
+        if (h.totalEmission === analysis.minEmission) badges.push(`<span class="history-badge badge-emission">${getTranslation("verdict_more_efficient")}</span>`);
         if ((h.totalCost||0) === analysis.minCost) badges.push(`<span class="history-badge badge-cost">Melhor Custo</span>`);
-        if (!analysis.isSingleBest && h.id === analysis.bestEntry.id) badges.push(`<span class="history-badge badge-balanced">Equilibrado</span>`);
+        if (!analysis.isSingleBest && h.id === analysis.bestEntry.id) badges.push(`<span class="history-badge badge-balanced">${getTranslation("verdict_balanced")}</span>`);
       }
       
       if (analysis.worstEntry && h.id === analysis.worstEntry.id && analysis.worstEntry.id !== analysis.bestEntry.id) {
-        badges.push(`<span class="history-badge badge-worst">Menor Desempenho</span>`);
+        badges.push(`<span class="history-badge badge-worst">${getTranslation("verdict_less_efficient")}</span>`);
       }
     }
     
@@ -645,17 +675,17 @@ function updateCharts(labels, data, bestData, colors, total, cost, rate, analysi
     if (diffCarbon > 0) {
       el.diffGauge1.textContent = `▲ ${diffCarbon.toFixed(1)}%`;
       el.diffGauge1.style.color = "#E85C46";
-      if(el.effGauge1) { el.effGauge1.textContent = "Solução Menos Eficiente"; el.effGauge1.style.color = "#E85C46"; }
+      if(el.effGauge1) { el.effGauge1.textContent = getTranslation("verdict_less_efficient"); el.effGauge1.style.color = "#E85C46"; }
       if(el.refGauge1) el.refGauge1.style.display = "block";
     } else if (diffCarbon < 0) {
       el.diffGauge1.textContent = `▼ ${Math.abs(diffCarbon).toFixed(1)}%`;
       el.diffGauge1.style.color = "#179B75";
-      if(el.effGauge1) { el.effGauge1.textContent = "Solução Mais Eficiente"; el.effGauge1.style.color = "#179B75"; }
+      if(el.effGauge1) { el.effGauge1.textContent = getTranslation("verdict_more_efficient"); el.effGauge1.style.color = "#179B75"; }
       if(el.refGauge1) el.refGauge1.style.display = "block";
     } else {
       el.diffGauge1.textContent = `-`;
       el.diffGauge1.style.color = "var(--text-muted)";
-      if(el.effGauge1) { el.effGauge1.textContent = "Solução Equivalente"; el.effGauge1.style.color = "var(--text-muted)"; }
+      if(el.effGauge1) { el.effGauge1.textContent = getTranslation("verdict_equivalent"); el.effGauge1.style.color = "var(--text-muted)"; }
       if(el.refGauge1) el.refGauge1.style.display = "none";
     }
   }
@@ -680,17 +710,17 @@ function updateCharts(labels, data, bestData, colors, total, cost, rate, analysi
     if (diffCost > 0) {
       el.diffGauge2.textContent = `▲ ${diffCost.toFixed(1)}%`;
       el.diffGauge2.style.color = "#E85C46";
-      if(el.effGauge2) { el.effGauge2.textContent = "Solução Menos Eficiente"; el.effGauge2.style.color = "#E85C46"; }
+      if(el.effGauge2) { el.effGauge2.textContent = getTranslation("verdict_less_efficient"); el.effGauge2.style.color = "#E85C46"; }
       if(el.refGauge2) el.refGauge2.style.display = "block";
     } else if (diffCost < 0) {
       el.diffGauge2.textContent = `▼ ${Math.abs(diffCost).toFixed(1)}%`;
       el.diffGauge2.style.color = "#179B75";
-      if(el.effGauge2) { el.effGauge2.textContent = "Solução Mais Eficiente"; el.effGauge2.style.color = "#179B75"; }
+      if(el.effGauge2) { el.effGauge2.textContent = getTranslation("verdict_more_efficient"); el.effGauge2.style.color = "#179B75"; }
       if(el.refGauge2) el.refGauge2.style.display = "block";
     } else {
       el.diffGauge2.textContent = `-`;
       el.diffGauge2.style.color = "var(--text-muted)";
-      if(el.effGauge2) { el.effGauge2.textContent = "Solução Equivalente"; el.effGauge2.style.color = "var(--text-muted)"; }
+      if(el.effGauge2) { el.effGauge2.textContent = getTranslation("verdict_equivalent"); el.effGauge2.style.color = "var(--text-muted)"; }
       if(el.refGauge2) el.refGauge2.style.display = "none";
     }
   }
@@ -831,44 +861,44 @@ function generateReport() {
     if (minCarbon !== Infinity && minCarbon > 0) {
       diffCarbon = ((h.totalEmission - minCarbon) / minCarbon) * 100;
       if (diffCarbon > 0) {
-        carbVerdict = "Solução Menos Eficiente";
+        carbVerdict = getTranslation("verdict_less_efficient");
         carbVerdictColor = "#E85C46"; // Vermelho
         carbDiffStr = `▲ ${diffCarbon.toFixed(1)}%`;
       } else if (diffCarbon < 0) {
-        carbVerdict = "Solução Mais Eficiente";
+        carbVerdict = getTranslation("verdict_more_efficient");
         carbVerdictColor = "#179B75"; // Verde
         carbDiffStr = `▼ ${Math.abs(diffCarbon).toFixed(1)}%`;
       } else {
-        carbVerdict = "Análise Mais Equilibrada (Melhor Escolha)";
+        carbVerdict = getTranslation("verdict_balanced");
         carbVerdictColor = "#179B75";
-        carbDiffStr = "Equivalente";
+        carbDiffStr = getTranslation("verdict_equivalent");
       }
     }
 
     if (minCost !== Infinity && minCost > 0) {
       diffCost = ((h.totalCost - minCost) / minCost) * 100;
       if (diffCost > 0) {
-        costVerdict = "Solução Menos Eficiente";
+        costVerdict = getTranslation("verdict_less_efficient");
         costVerdictColor = "#E85C46";
         costDiffStr = `▲ ${diffCost.toFixed(1)}%`;
       } else if (diffCost < 0) {
-        costVerdict = "Solução Mais Eficiente";
+        costVerdict = getTranslation("verdict_more_efficient");
         costVerdictColor = "#179B75";
         costDiffStr = `▼ ${Math.abs(diffCost).toFixed(1)}%`;
       } else {
-        costVerdict = "Análise Mais Equilibrada (Melhor Escolha)";
+        costVerdict = getTranslation("verdict_balanced");
         costVerdictColor = "#179B75";
-        costDiffStr = "Equivalente";
+        costDiffStr = getTranslation("verdict_equivalent");
       }
     }
 
     // Calcular enquadramento
     const carbRef = benchmarkData.carbon.find(c => c.id === state.bmCarbonType) || benchmarkData.carbon[0];
-    let carbStatus = carbRate <= carbRef.min ? "Bom (▼)" : (carbRate <= carbRef.max ? "Médio (▬)" : "Ruim (▲)");
+    let carbStatus = carbRate <= carbRef.min ? getTranslation("status_good") : (carbRate <= carbRef.max ? getTranslation("status_avg") : getTranslation("status_bad"));
     
     let costStatus = "---";
     if (state.bmCubValue > 0) {
-      costStatus = costRate <= state.bmCubValue ? "Bom (▼)" : (costRate <= state.bmCubValue * 1.2 ? "Médio (▬)" : "Ruim (▲)");
+      costStatus = costRate <= state.bmCubValue ? getTranslation("status_good") : (costRate <= state.bmCubValue * 1.2 ? getTranslation("status_avg") : getTranslation("status_bad"));
     }
 
     // Gerar Tabela de Materiais
@@ -904,60 +934,60 @@ function generateReport() {
       <div class="report-page">
         <div class="report-header">
           <div class="report-title">
-            <h1>Relatório de Análise - Cenário ${index + 1}</h1>
+            <h1>${getTranslation("report_title")} ${index + 1}</h1>
             <h2>${h.name}</h2>
           </div>
           <div class="report-meta">
-            Data: ${dateStr}<br>
-            Estado: ${h.selectedState}<br>
-            Área Construída: ${bArea.toLocaleString("pt-BR")} m²
+            ${getTranslation("report_date")}: ${dateStr}<br>
+            ${getTranslation("report_state")}: ${h.selectedState}<br>
+            ${getTranslation("report_area")}: ${bArea.toLocaleString("pt-BR")} m²
           </div>
         </div>
 
         <div class="report-kpi-grid">
           <div class="report-kpi">
-            <div class="report-kpi-title">Desempenho Geral (Carbono)</div>
+            <div class="report-kpi-title">${getTranslation("report_total_carbon")}</div>
             <div class="report-kpi-val" style="color: ${carbVerdictColor};">${carbDiffStr}</div>
             <div style="font-size: 11pt; font-weight: bold; margin-top: 10px; color: ${carbVerdictColor};">${carbVerdict}</div>
-            <div style="font-size: 9pt; color: #777;">Total: ${h.totalEmission.toLocaleString("pt-BR", {maximumFractionDigits:2})} kgCO₂e</div>
+            <div style="font-size: 9pt; color: #777;">${getTranslation("report_total")}: ${h.totalEmission.toLocaleString("pt-BR", {maximumFractionDigits:2})} kgCO₂e</div>
           </div>
           <div class="report-kpi">
-            <div class="report-kpi-title">Custo Parcial</div>
+            <div class="report-kpi-title">${getTranslation("report_total_cost")}</div>
             <div class="report-kpi-val" style="color: ${costVerdictColor};">${costDiffStr}</div>
             <div style="font-size: 11pt; font-weight: bold; margin-top: 10px; color: ${costVerdictColor};">${costVerdict}</div>
-            <div style="font-size: 9pt; color: #777;">Total: R$ ${h.totalCost.toLocaleString("pt-BR", {maximumFractionDigits:2})}</div>
+            <div style="font-size: 9pt; color: #777;">${getTranslation("report_total")}: R$ ${h.totalCost.toLocaleString("pt-BR", {maximumFractionDigits:2})}</div>
           </div>
         </div>
 
         <div class="report-bm-box">
-          <div class="report-bm-title">Enquadramento de Intensidade</div>
+          <div class="report-bm-title">${getTranslation("report_bm_box")}</div>
           <div class="report-bm-row">
             <div class="report-bm-item">
-              <strong>Intensidade de Carbono:</strong> ${carbRate.toLocaleString("pt-BR", {maximumFractionDigits:2})} kgCO₂e/m²<br>
-              <span style="color:#555; font-size:9pt;">Referência: ${carbRef.name}</span>
-              <div class="report-kpi-indicator">Status: ${carbStatus}</div>
+              <strong>${getTranslation("report_carb_intensity")}:</strong> ${carbRate.toLocaleString("pt-BR", {maximumFractionDigits:2})} kgCO₂e/m²<br>
+              <span style="color:#555; font-size:9pt;">${getTranslation("report_ref")}: ${carbRef.name}</span>
+              <div class="report-kpi-indicator">${getTranslation("report_status")}: ${carbStatus}</div>
             </div>
             <div class="report-bm-item">
-              <strong>Intensidade de Custo:</strong> R$ ${costRate.toLocaleString("pt-BR", {maximumFractionDigits:2})} /m²<br>
-              <span style="color:#555; font-size:9pt;">CUB Local Base: R$ ${(state.bmCubValue||0).toLocaleString("pt-BR", {maximumFractionDigits:2})}</span>
-              <div class="report-kpi-indicator">Status: ${costStatus}</div>
+              <strong>${getTranslation("report_cost_intensity")}:</strong> R$ ${costRate.toLocaleString("pt-BR", {maximumFractionDigits:2})} /m²<br>
+              <span style="color:#555; font-size:9pt;">${getTranslation("report_cub_base")}: R$ ${(state.bmCubValue||0).toLocaleString("pt-BR", {maximumFractionDigits:2})}</span>
+              <div class="report-kpi-indicator">${getTranslation("report_status")}: ${costStatus}</div>
             </div>
           </div>
         </div>
 
-        <h3 style="color: var(--tpf-blue-inst); margin-bottom: 10px;">Composição de Materiais e Impacto</h3>
+        <h3 style="color: var(--tpf-blue-inst); margin-bottom: 10px;">${getTranslation("report_materials")}</h3>
         <table class="report-table">
           <thead>
             <tr>
-              <th>Categoria</th>
-              <th>Material Selecionado</th>
-              <th>Qtd.</th>
-              <th>Emissão (Impacto %)</th>
-              <th>Custo (Impacto %)</th>
+              <th>${getTranslation("report_th_cat")}</th>
+              <th>${getTranslation("report_th_mat")}</th>
+              <th>${getTranslation("report_th_qty")}</th>
+              <th>${getTranslation("report_th_emis")}</th>
+              <th>${getTranslation("report_th_cost")}</th>
             </tr>
           </thead>
           <tbody>
-            ${tableRows || `<tr><td colspan="5" style="text-align:center;">Nenhum material selecionado.</td></tr>`}
+            ${tableRows || `<tr><td colspan="5" style="text-align:center;">${getTranslation("report_no_mat")}</td></tr>`}
           </tbody>
         </table>
       </div>
