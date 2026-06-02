@@ -99,7 +99,16 @@ const translations = {
     status_good: "Bom (▼)",
     status_avg: "Médio (▬)",
     status_bad: "Ruim (▲)",
-    badge_cost: "Melhor Custo"
+    badge_cost: "Melhor Custo",
+    
+    lbl_scenario: "Cenário",
+    opt_min: "Mínimo",
+    opt_med: "Médio",
+    opt_max: "Máximo",
+    btn_clear: "Reiniciar",
+    kpi_trees_unit: "árvores (ref: 15kg/ano)",
+    theme_dark: "🌓 Escuro",
+    theme_light: "🌓 Claro"
   },
   
   en: {
@@ -191,19 +200,28 @@ const translations = {
     status_good: "Good (▼)",
     status_avg: "Average (▬)",
     status_bad: "Poor (▲)",
-    badge_cost: "Best Cost"
+    badge_cost: "Best Cost",
+    
+    lbl_scenario: "Scenario",
+    opt_min: "Minimum",
+    opt_med: "Medium",
+    opt_max: "Maximum",
+    btn_clear: "Reset",
+    kpi_trees_unit: "trees (ref: 15kg/year)",
+    theme_dark: "🌓 Dark",
+    theme_light: "🌓 Light"
   },
   
   fr: {
     hub_title: "HUB DE DÉVELOPPEMENT DURABLE",
-    hub_subtitle: "TPF Engenharia - Calculateurs de Carbone Incarporé",
+    hub_subtitle: "TPF Engenharia - Calculateurs de Carbone Incorporé",
     hub_edificacoes: "Bâtiments",
     hub_edificacoes_desc: "Analyse des émissions et des coûts pour projets résidentiels, commerciaux et sociaux.",
     hub_rodovias: "Infrastructure Routière",
     hub_rodovias_desc: "Analyse des émissions et des coûts pour pavage, terrassement et construction de routes.",
     hub_em_breve: "Bientôt disponible",
 
-    dash_title: "Calculateur Simplifié de Carbone Incarporé - TPF",
+    dash_title: "Calculateur Simplifié de Carbone Incorporé - TPF",
     btn_hub: "⬅️ Retour au Hub",
     btn_save: "Sauvegarder Scénario",
     btn_export: "Exporter",
@@ -228,7 +246,7 @@ const translations = {
     lbl_select_material: "-- Sélectionner --",
     lbl_loading: "Chargement...",
     
-    kpi_carbon: "CARBONE INCARPORÉ TOTAL",
+    kpi_carbon: "CARBONE INCORPORÉ TOTAL",
     kpi_carbon_desc: "Émissions totales du scénario",
     kpi_cost: "COÛT DU PROJET PARTIEL",
     kpi_cost_desc: "Coût total des matériaux listés",
@@ -283,7 +301,16 @@ const translations = {
     status_good: "Bon (▼)",
     status_avg: "Moyen (▬)",
     status_bad: "Mauvais (▲)",
-    badge_cost: "Meilleur Coût"
+    badge_cost: "Meilleur Coût",
+    
+    lbl_scenario: "Scénario",
+    opt_min: "Minimum",
+    opt_med: "Moyen",
+    opt_max: "Maximum",
+    btn_clear: "Réinitialiser",
+    kpi_trees_unit: "arbres (ref: 15kg/an)",
+    theme_dark: "🌓 Sombre",
+    theme_light: "🌓 Clair"
   },
   
   de: {
@@ -375,7 +402,16 @@ const translations = {
     status_good: "Gut (▼)",
     status_avg: "Mittel (▬)",
     status_bad: "Schlecht (▲)",
-    badge_cost: "Beste Kosten"
+    badge_cost: "Beste Kosten",
+    
+    lbl_scenario: "Szenario",
+    opt_min: "Minimum",
+    opt_med: "Mittel",
+    opt_max: "Maximum",
+    btn_clear: "Zurücksetzen",
+    kpi_trees_unit: "Bäume (Ref: 15kg/Jahr)",
+    theme_dark: "🌓 Dunkel",
+    theme_light: "🌓 Hell"
   },
   
   es: {
@@ -467,6 +503,15 @@ const translations = {
     status_good: "Bueno (▼)",
     status_avg: "Medio (▬)",
     status_bad: "Malo (▲)",
-    badge_cost: "Mejor Costo"
+    badge_cost: "Mejor Costo",
+    
+    lbl_scenario: "Escenario",
+    opt_min: "Mínimo",
+    opt_med: "Medio",
+    opt_max: "Máximo",
+    btn_clear: "Reiniciar",
+    kpi_trees_unit: "árboles (ref: 15kg/año)",
+    theme_dark: "🌓 Oscuro",
+    theme_light: "🌓 Claro"
   }
 };

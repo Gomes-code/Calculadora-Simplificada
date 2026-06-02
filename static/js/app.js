@@ -28,6 +28,7 @@ function applyTranslations() {
     const key = el.getAttribute('data-i18n-placeholder');
     el.placeholder = getTranslation(key);
   });
+  updateThemeButtonText();
 }
 
 window.changeLang = function(lang) {
@@ -75,7 +76,8 @@ const el = {
   refGauge1: document.getElementById("refGauge1"),
   refGauge2: document.getElementById("refGauge2"),
   themeToggleBtn: document.getElementById("themeToggleBtn"),
-  stateSelect: document.getElementById("stateSelect")
+  stateSelect: document.getElementById("stateSelect"),
+  langSelector: document.getElementById("langSelector")
 };
 
 function loadState() {
@@ -107,17 +109,23 @@ async function fetchJson(url) {
 }
 
 // --- UI Theme (Light/Dark) ---
+function updateThemeButtonText() {
+  if (!el.themeToggleBtn) return;
+  const currentTheme = document.documentElement.getAttribute("data-theme") || "light";
+  el.themeToggleBtn.textContent = currentTheme === "dark" ? getTranslation("theme_dark") : getTranslation("theme_light");
+}
+
 function initTheme() {
   const savedTheme = localStorage.getItem("tpf-theme") || "light";
   document.documentElement.setAttribute("data-theme", savedTheme);
-  el.themeToggleBtn.textContent = savedTheme === "dark" ? "🌓 Escuro" : "🌓 Claro";
+  updateThemeButtonText();
   
   el.themeToggleBtn.addEventListener("click", () => {
     const currentTheme = document.documentElement.getAttribute("data-theme");
     const newTheme = currentTheme === "dark" ? "light" : "dark";
     document.documentElement.setAttribute("data-theme", newTheme);
     localStorage.setItem("tpf-theme", newTheme);
-    el.themeToggleBtn.textContent = newTheme === "dark" ? "🌓 Escuro" : "🌓 Claro";
+    updateThemeButtonText();
     updateChartTheme(newTheme);
   });
 }
@@ -140,6 +148,8 @@ function updateChartTheme(theme) {
 }
 
 async function bootstrap() {
+  if (el.langSelector) el.langSelector.value = currentLang;
+  applyTranslations();
   initTheme();
   initBenchmarks();
   // Chart.js globais

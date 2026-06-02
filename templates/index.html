@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title data-i18n="dash_title">Calculadora de Carbono TPF - Dashboard</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}?v=36">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}?v=41">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     .lang-selector {
@@ -47,7 +47,7 @@
         <div class="loading-text" data-i18n="lbl_loading">Carregando categorias...</div>
       </div>
       <div class="sidebar-footer" style="display: flex; flex-direction: column; gap: 12px;">
-        <button id="saveSimulation" class="btn-primary" style="width: 100%;" data-i18n="btn_save">Salvar Cenário (💾)</button>
+        <button id="saveSimulation" class="btn-primary" style="width: 100%;" data-i18n="btn_save">Salvar Cenário</button>
         <button id="clearQuantities" class="btn-secondary" style="width: 100%;" data-i18n="btn_clear">Reiniciar</button>
       </div>
     </aside>
@@ -67,11 +67,11 @@
               <option value="AC">AC</option><option value="AL">AL</option><option value="AM">AM</option><option value="AP">AP</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MG">MG</option><option value="MS">MS</option><option value="MT">MT</option><option value="PA">PA</option><option value="PB">PB</option><option value="PE">PE</option><option value="PI">PI</option><option value="PR">PR</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RO">RO</option><option value="RR">RR</option><option value="RS">RS</option><option value="SC">SC</option><option value="SE">SE</option><option value="SP" selected>SP</option><option value="TO">TO</option>
             </select>
           </label>
-          <label>Cenário
+          <label><span data-i18n="lbl_scenario">Cenário</span>
             <select id="scenarioSelect" class="form-select">
-              <option value="min">Mínimo</option>
-              <option value="med" selected>Médio</option>
-              <option value="max">Máximo</option>
+              <option value="min" data-i18n="opt_min">Mínimo</option>
+              <option value="med" selected data-i18n="opt_med">Médio</option>
+              <option value="max" data-i18n="opt_max">Máximo</option>
             </select>
           </label>
           <label><span data-i18n="lbl_area">Área construída (m²)</span>
@@ -112,9 +112,9 @@
           <small>R$/m²</small>
         </div>
         <div class="kpi-card">
-          <span>Compensação Estimada</span>
+          <span data-i18n="kpi_trees">Compensação Estimada</span>
           <strong id="kpiTrees">🌲 0</strong>
-          <small>árvores (ref: 15kg/ano)</small>
+          <small data-i18n="kpi_trees_unit">árvores (ref: 15kg/ano)</small>
         </div>
       </div>
 
@@ -227,7 +227,7 @@
   <!-- Área de Impressão -->
   <div id="printArea"></div>
 
-  <script src="{{ url_for('static', filename='js/translations.js') }}?v=40"></script>
-  <script src="{{ url_for('static', filename='js/app.js') }}?v=40"></script>
+  <script src="{{ url_for('static', filename='js/translations.js') }}?v=41"></script>
+  <script src="{{ url_for('static', filename='js/app.js') }}?v=41"></script>
 </body>
 </html>
