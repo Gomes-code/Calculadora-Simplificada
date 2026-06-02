@@ -822,12 +822,15 @@ body {
 @media (max-width: 1250px) {
   .top-header {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-end;
     gap: 16px;
   }
+  .title-area {
+    align-self: flex-start;
+  }
   .global-controls {
-    width: 100%;
-    justify-content: flex-start;
+    width: auto;
+    justify-content: flex-end;
     flex-wrap: wrap;
   }
 }

@@ -108,7 +108,9 @@ const translations = {
     btn_clear: "Reiniciar",
     kpi_trees_unit: "árvores (ref: 15kg/ano)",
     theme_dark: "🌓 Escuro",
-    theme_light: "🌓 Claro"
+    theme_light: "🌓 Claro",
+    lbl_current_analysis: "Análise Atual",
+    lbl_best_analysis: "Melhor Análise (Ref)"
   },
   
   en: {
@@ -209,7 +211,9 @@ const translations = {
     btn_clear: "Reset",
     kpi_trees_unit: "trees (ref: 15kg/year)",
     theme_dark: "🌓 Dark",
-    theme_light: "🌓 Light"
+    theme_light: "🌓 Light",
+    lbl_current_analysis: "Current Analysis",
+    lbl_best_analysis: "Best Analysis (Ref)"
   },
   
   fr: {
@@ -310,7 +314,9 @@ const translations = {
     btn_clear: "Réinitialiser",
     kpi_trees_unit: "arbres (ref: 15kg/an)",
     theme_dark: "🌓 Sombre",
-    theme_light: "🌓 Clair"
+    theme_light: "🌓 Clair",
+    lbl_current_analysis: "Analyse Actuelle",
+    lbl_best_analysis: "Meilleure Analyse (Réf)"
   },
   
   de: {
@@ -411,7 +417,9 @@ const translations = {
     btn_clear: "Zurücksetzen",
     kpi_trees_unit: "Bäume (Ref: 15kg/Jahr)",
     theme_dark: "🌓 Dunkel",
-    theme_light: "🌓 Hell"
+    theme_light: "🌓 Hell",
+    lbl_current_analysis: "Aktuelle Analyse",
+    lbl_best_analysis: "Beste Analyse (Ref)"
   },
   
   es: {
@@ -512,6 +520,8 @@ const translations = {
     btn_clear: "Reiniciar",
     kpi_trees_unit: "árboles (ref: 15kg/año)",
     theme_dark: "🌓 Oscuro",
-    theme_light: "🌓 Claro"
+    theme_light: "🌓 Claro",
+    lbl_current_analysis: "Análisis Actual",
+    lbl_best_analysis: "Mejor Análisis (Ref)"
   }
 };

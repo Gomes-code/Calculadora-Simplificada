@@ -642,6 +642,8 @@ function updateCharts(labels, data, bestData, colors, total, cost, rate, analysi
 
   // Bar
   charts.bar.data.labels = labels;
+  charts.bar.data.datasets[0].label = getTranslation("lbl_current_analysis");
+  charts.bar.data.datasets[1].label = getTranslation("lbl_best_analysis");
   charts.bar.data.datasets[0].data = data;
   charts.bar.data.datasets[0].backgroundColor = colors;
   
