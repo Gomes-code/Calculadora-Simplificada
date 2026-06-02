@@ -390,7 +390,7 @@ function updateDashboard() {
     
     totalEmission += emission;
     totalCost += cost;
-    catLabels.push(cat.label);
+    catLabels.push(getTranslation("cat_" + key) || cat.label);
     catEmissions.push(emission);
     bestCatEmissions.push(bestEmission);
     catColors.push(CATEGORY_COLORS[key] || CATEGORY_COLORS.default);
@@ -427,7 +427,7 @@ function updateDashboard() {
 function renderHistory(analysis) {
   if (!el.historyList) return;
   if (!state.history || state.history.length === 0) {
-    el.historyList.innerHTML = `<div class="history-empty">Nenhuma análise registrada. Salve para comparar.</div>`;
+    el.historyList.innerHTML = `<div class="history-empty">${getTranslation("hist_empty")}</div>`;
     return;
   }
   
@@ -442,7 +442,7 @@ function renderHistory(analysis) {
         badges.push(`<span class="history-badge badge-super-best">${getTranslation("verdict_balanced")}</span>`);
       } else {
         if (h.totalEmission === analysis.minEmission) badges.push(`<span class="history-badge badge-emission">${getTranslation("verdict_more_efficient")}</span>`);
-        if ((h.totalCost||0) === analysis.minCost) badges.push(`<span class="history-badge badge-cost">Melhor Custo</span>`);
+        if ((h.totalCost||0) === analysis.minCost) badges.push(`<span class="history-badge badge-cost">${getTranslation("badge_cost") || "Melhor Custo"}</span>`);
         if (!analysis.isSingleBest && h.id === analysis.bestEntry.id) badges.push(`<span class="history-badge badge-balanced">${getTranslation("verdict_balanced")}</span>`);
       }
       

@@ -97,7 +97,8 @@ const translations = {
     // Status Ratings
     status_good: "Bom (▼)",
     status_avg: "Médio (▬)",
-    status_bad: "Ruim (▲)"
+    status_bad: "Ruim (▲)",
+    badge_cost: "Melhor Custo"
   },
   
   en: {
@@ -187,7 +188,8 @@ const translations = {
     
     status_good: "Good (▼)",
     status_avg: "Average (▬)",
-    status_bad: "Poor (▲)"
+    status_bad: "Poor (▲)",
+    badge_cost: "Best Cost"
   },
   
   fr: {
@@ -277,7 +279,8 @@ const translations = {
     
     status_good: "Bon (▼)",
     status_avg: "Moyen (▬)",
-    status_bad: "Mauvais (▲)"
+    status_bad: "Mauvais (▲)",
+    badge_cost: "Meilleur Coût"
   },
   
   de: {
@@ -367,7 +370,8 @@ const translations = {
     
     status_good: "Gut (▼)",
     status_avg: "Mittel (▬)",
-    status_bad: "Schlecht (▲)"
+    status_bad: "Schlecht (▲)",
+    badge_cost: "Beste Kosten"
   },
   
   es: {
@@ -457,6 +461,7 @@ const translations = {
     
     status_good: "Bueno (▼)",
     status_avg: "Medio (▬)",
-    status_bad: "Malo (▲)"
+    status_bad: "Malo (▲)",
+    badge_cost: "Mejor Costo"
   }
 };
